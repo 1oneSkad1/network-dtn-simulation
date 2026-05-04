@@ -1,0 +1,4 @@
+# Route to Earth (Node 1) via Relay (Node 3)
+a plan 1 ltp/3
+# Route to Relay (Node 3)
+a plan 3 ltp/3

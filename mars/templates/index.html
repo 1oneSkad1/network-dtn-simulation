@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MARS - ALIEN ALIEN STATION</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Inter:wght@900&display=swap');
+
+        :root {
+            --nayuta-orange: #FF8C00;
+            --nayuta-white: #FFFFFF;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--nayuta-orange);
+            font-family: 'Inter', 'Black Han Sans', sans-serif;
+            color: var(--nayuta-white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-transform: uppercase;
+        }
+
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        .alien-head {
+            width: 80px;
+            height: 60px;
+            background: var(--nayuta-white);
+            border-radius: 50% 50% 45% 45%;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+        .alien-head::before, .alien-head::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 25px;
+            background: var(--nayuta-orange);
+            border-radius: 50%;
+            top: 15px;
+        }
+        .alien-head::before { left: 20px; transform: rotate(15deg); }
+        .alien-head::after { right: 20px; transform: rotate(-15deg); }
+        
+        .antenna {
+            position: absolute;
+            width: 4px;
+            height: 20px;
+            background: var(--nayuta-white);
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .antenna::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--nayuta-white);
+            border-radius: 50%;
+            top: -8px;
+            left: -3px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin: 0;
+            letter-spacing: -2px;
+            line-height: 0.9;
+        }
+
+        h3 {
+            background: var(--nayuta-white);
+            color: var(--nayuta-orange);
+            display: inline-block;
+            padding: 5px 20px;
+            margin-top: 30px;
+            font-size: 2rem;
+        }
+
+        .file-list {
+            margin-top: 20px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .file-item {
+            background: var(--nayuta-white);
+            color: var(--nayuta-orange);
+            margin: 10px 0;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-align: left;
+        }
+        .file-item::before {
+            content: '>';
+            margin-right: 15px;
+        }
+
+        #emptyMsg {
+            font-size: 1.5rem;
+            margin-top: 40px;
+            opacity: 0.8;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="alien-head"><div class="antenna"></div></div>
+        <h1>ALIEN ALIEN<br>MARS</h1>
+        <div style="background: var(--nayuta-white); color: var(--nayuta-orange); display: inline-block; padding: 5px 15px; font-weight: 900; margin: 10px 0 30px;">
+            NODE 02 STATUS: <span id="nodeStatus">LOADING...</span>
+        </div>
+        
+        <h3>RECEIVED</h3>
+        <ul id="fileList" class="file-list"></ul>
+        <p id="emptyMsg">NO SIGNALS FROM EARTH...</p>
+    </div>
+
+    <script>
+        function updateFiles() {
+            fetch('/files')
+                .then(r => r.json())
+                .then(data => {
+                    const list = document.getElementById('fileList');
+                    const empty = document.getElementById('emptyMsg');
+                    list.innerHTML = '';
+                    
+                    if (data.files.length === 0) {
+                        empty.style.display = 'block';
+                    } else {
+                        empty.style.display = 'none';
+                        data.files.forEach(file => {
+                            const li = document.createElement('li');
+                            li.className = 'file-item';
+                            li.textContent = file;
+                            list.appendChild(li);
+                        });
+                    }
+                });
+        }
+        setInterval(updateFiles, 3000);
+        updateFiles();
+    </script>
+</body>
+</html>
+               });
+        }
+        setInterval(updateStatus, 5000);
+        setInterval(updateFiles, 3000);
+        updateStatus();
+        updateFiles();
+    </script>
+</body>
+</html>

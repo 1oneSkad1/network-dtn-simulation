@@ -1,0 +1,4 @@
+1 100
+# Span to Relay (Node 3)
+a span 3 128 128 1024 1024 1 'udplso 192.168.1.20:1113'
+s 'udplsi 0.0.0.0:1113'
